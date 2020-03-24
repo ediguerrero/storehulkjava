@@ -17,7 +17,16 @@ productos.add(x);
 
 
     }
+public void borrarproducto (String nombreproducto){
+        for (int i=0;i<productos.size();i++){
+            if(productos.get(i).getNombre().contains(nombreproducto)){
+                productos.remove(i);
+            }
+            System.out.println("borrado");
+        }
 
+
+}
 
     public ArrayList<Producto> getProductos() {
         return productos;
