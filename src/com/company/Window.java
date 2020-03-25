@@ -2,6 +2,8 @@ package com.company;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Window extends JFrame {
     private JList lista;
@@ -22,10 +24,13 @@ public class Window extends JFrame {
         JLabel precio1 = new JLabel("precio");
         JTextField precio = new JTextField("hola");
         JLabel tipo1 = new JLabel("tipo");
-        JTextField tipo = new JTextField("hola");
+        JComboBox tipo = new JComboBox();
 
-        JPanel contenido = new JPanel();
-        contenido.setLayout(new BorderLayout());
+        tipo.addItem("CAMISETA");
+        tipo.addItem("VASO");
+        tipo.addItem("JUGUETE");
+        tipo.addItem("ACCESORIO");
+
         JPanel panel1 = new JPanel();
         panel1.setLayout(new GridLayout(8, 2));
 
@@ -53,7 +58,50 @@ public class Window extends JFrame {
         panel2.add(actualizar);
 
         this.add(panel2, BorderLayout.SOUTH);
-        this.add(contenido, BorderLayout.EAST);
+
+
+        JDialog insertarproducto=new JDialog();
+        insertarproducto.setTitle("agrega un producto");
+        insertarproducto.setSize(400,400);
+        insertarproducto.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        insertarproducto.setLayout(new BorderLayout());
+JPanel panel3=new JPanel();
+panel3.setLayout(new GridLayout(8, 2));
+
+        JLabel nombre2 = new JLabel("Nombre del producto");
+        JTextField nombre3 = new JTextField("hola");
+        JLabel contidad12 = new JLabel("cantidad en stock");
+        JTextField cantidad3 = new JTextField("hola");
+        JLabel precio12 = new JLabel("precio");
+        JTextField precio3 = new JTextField("hola");
+        JLabel tipo12 = new JLabel("tipo");
+        JComboBox tipo3 = new JComboBox();
+
+        tipo3.addItem("CAMISETA");
+        tipo3.addItem("VASO");
+        tipo3.addItem("JUGUETE");
+        tipo3.addItem("ACCESORIO");
+
+        panel3.add(nombre2);
+
+        panel3.add(nombre3);
+
+        panel3.add(contidad12);
+        panel3.add(cantidad3);
+        panel3.add(precio12);
+        panel3.add(precio3);
+        panel3.add(tipo12);
+        panel3.add(tipo3);
+        insertarproducto.add(panel3,BorderLayout.CENTER);
+        JButton add =new JButton("agregar producto");
+        insertarproducto.add(add,BorderLayout.SOUTH);
+
+        agregar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                insertarproducto.setVisible(true);            }
+        });
+
     }
 
 }

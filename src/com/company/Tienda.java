@@ -10,9 +10,9 @@ public class Tienda {
 
     public ArrayList <Producto> productos;
 
-    public void crearproducto(String nombreproducto,int cantidadproducto, String tipoproducto){
+    public void crearproducto(String nombreproducto,int cantidadproducto, double precio,String tipoproducto){
         productos =new ArrayList<Producto>();
-Producto x=new Producto(nombreproducto,cantidadproducto,tipoproducto);
+Producto x=new Producto(nombreproducto,cantidadproducto,precio,tipoproducto);
 productos.add(x);
 
 

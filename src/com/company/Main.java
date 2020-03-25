@@ -8,9 +8,9 @@ public class Main {
 	// write your code here
 Tienda x =new Tienda();
 
-x.crearproducto("javon",5,Tienda.CAMISETA);
+x.crearproducto("javon",5, 200,Tienda.CAMISETA);
 
-System.out.println(x.getProductos().get(0).nombre+" "+ x.getProductos().get(0).cantidad+""+x.getProductos().get(0).tipo);
+System.out.println(x.getProductos().get(0).nombre+" "+ x.getProductos().get(0).cantidad+""+x.getProductos().get(0).tipo+ ""+x.getProductos().get(0).precio);
         System.out.println(x.getProductos().size());
 
    // x.borrarproducto("javon");
