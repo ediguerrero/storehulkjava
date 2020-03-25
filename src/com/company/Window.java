@@ -165,18 +165,24 @@ public class Window extends JFrame {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 try {
-                    int can = Integer.parseInt(cantidad3.getText().split(" ")[0]);
-                    double pre = Double.parseDouble(precio3.getText().split(" ")[0]);
-                    if (tienda.buscarpornombre(nombre3.getText()) == null) {
-                        tienda.crearproducto(nombre3.getText(), can, pre, tipo3.getSelectedItem().toString());
-                        insertarproducto.setVisible(false);
-                        System.out.println(tienda.getProductos().size());
 
-                        lista.setListData(tienda.darnombres());
+                    if (nombre3.getText().equals("")){
+                        JOptionPane.showMessageDialog(insertarproducto, "dele un nombre al producto", "Cuidado", JOptionPane.WARNING_MESSAGE);
 
-                    } else
-                        JOptionPane.showMessageDialog(insertarproducto, "ya existe un producto con ese nombre", "Cuidado", JOptionPane.WARNING_MESSAGE);
+                    }else {
+                        int can = Integer.parseInt(cantidad3.getText().split(" ")[0]);
+                        double pre = Double.parseDouble(precio3.getText().split(" ")[0]);
 
+                        if (tienda.buscarpornombre(nombre3.getText()) == null) {
+                            tienda.crearproducto(nombre3.getText(), can, pre, tipo3.getSelectedItem().toString());
+                            insertarproducto.setVisible(false);
+                            System.out.println(tienda.getProductos().size());
+
+                            lista.setListData(tienda.darnombres());
+
+                        } else
+                            JOptionPane.showMessageDialog(insertarproducto, "ya existe un producto con ese nombre", "Cuidado", JOptionPane.WARNING_MESSAGE);
+                    }
                 } catch (NumberFormatException e) {
                     JOptionPane.showMessageDialog(insertarproducto, "la cantidad y el precio deben ser de tipo numerico", "Cuidado", JOptionPane.WARNING_MESSAGE);
                 } catch (NullPointerException e) {
