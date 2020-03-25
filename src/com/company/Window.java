@@ -1,6 +1,8 @@
 package com.company;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,7 +14,8 @@ public class Window extends JFrame {
         JButton boton1 = new JButton("hola");
 
         this.setSize(600, 400);
-        lista = new JList(tienda.getProductos().toArray());
+        lista = new JList(tienda.darnombres());
+        lista.setSize(200,200);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         this.getContentPane().add(lista, BorderLayout.WEST);
@@ -71,9 +74,9 @@ panel3.setLayout(new GridLayout(8, 2));
         JLabel nombre2 = new JLabel("Nombre del producto");
         JTextField nombre3 = new JTextField("hola");
         JLabel contidad12 = new JLabel("cantidad en stock");
-        JTextField cantidad3 = new JTextField("hola");
+        JTextField cantidad3 = new JTextField("3");
         JLabel precio12 = new JLabel("precio");
-        JTextField precio3 = new JTextField("hola");
+        JTextField precio3 = new JTextField("3");
         JLabel tipo12 = new JLabel("tipo");
         JComboBox tipo3 = new JComboBox();
 
@@ -96,12 +99,37 @@ panel3.setLayout(new GridLayout(8, 2));
         JButton add =new JButton("agregar producto");
         insertarproducto.add(add,BorderLayout.SOUTH);
 
+        add.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                try {
+                    tienda.crearproducto(nombre3.getText(), Integer.parseInt(cantidad3.getText()), Double.parseDouble(precio3.getText()), tipo3.getSelectedItem().toString());
+                    insertarproducto.setVisible(false);
+                    System.out.println(tienda.getProductos().size());
+
+                    lista.setListData(tienda.darnombres());
+
+                }
+                catch (Exception e){
+                    JOptionPane.showMessageDialog(insertarproducto, "la cantidad y el precio deben ser de tipo numerico","Cuidado" ,JOptionPane.WARNING_MESSAGE);
+                }
+                }
+        });
+
         agregar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 insertarproducto.setVisible(true);            }
         });
 
+        lista.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent listSelectionEvent) {
+                nombre.setText(lista.getSelectedValue().toString());
+            }
+        });
     }
+
+
 
 }

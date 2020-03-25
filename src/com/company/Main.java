@@ -9,8 +9,11 @@ public class Main {
 Tienda x =new Tienda();
 
 x.crearproducto("javon",5, 200,Tienda.CAMISETA);
+x.crearproducto("javon1",5, 200,Tienda.CAMISETA);
 
 System.out.println(x.getProductos().get(0).nombre+" "+ x.getProductos().get(0).cantidad+""+x.getProductos().get(0).tipo+ ""+x.getProductos().get(0).precio);
+        System.out.println(x.getProductos().get(0).nombre+" "+ x.getProductos().get(0).cantidad+""+x.getProductos().get(0).tipo+ ""+x.getProductos().get(0).precio);
+
         System.out.println(x.getProductos().size());
 
    // x.borrarproducto("javon");

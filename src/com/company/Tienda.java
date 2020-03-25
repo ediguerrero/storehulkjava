@@ -9,9 +9,12 @@ public class Tienda {
     public final static String ACCESORIO = "ACCESORIO";
 
     public ArrayList <Producto> productos;
+    public Tienda(){
+        productos =new ArrayList<Producto>();
+
+    }
 
     public void crearproducto(String nombreproducto,int cantidadproducto, double precio,String tipoproducto){
-        productos =new ArrayList<Producto>();
 Producto x=new Producto(nombreproducto,cantidadproducto,precio,tipoproducto);
 productos.add(x);
 
@@ -37,6 +40,12 @@ public void borrarproducto (String nombreproducto){
     }
 
 
-
+public String [] darnombres(){
+  String [] x= new String[productos.size()];
+    for (int i=0;i<productos.size();i++){
+       x[i]=productos.get(i).getNombre();
+        }
+        return x;
+}
 
 }
