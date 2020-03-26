@@ -1,8 +1,5 @@
 package com.company;
 
-import javax.swing.*;
-import java.awt.Toolkit.*;
-
 public class Main {
 
     public static void main(String[] args) {
@@ -12,8 +9,8 @@ public class Main {
         x.crearproducto("revista", 5, 200, Tienda.CAMISETA);
         x.crearproducto("batman", 5, 200, Tienda.CAMISETA);
 
-        System.out.println(x.getProductos().get(0).nombre + " " + x.getProductos().get(0).cantidad + "" + x.getProductos().get(0).tipo + "" + x.getProductos().get(0).precio);
-        System.out.println(x.getProductos().get(0).nombre + " " + x.getProductos().get(0).cantidad + "" + x.getProductos().get(0).tipo + "" + x.getProductos().get(0).precio);
+        System.out.println(x.getProductos().get(0).getNombre() + " " + x.getProductos().get(0).getCantidad() + "" + x.getProductos().get(0).getTipo() + "" + x.getProductos().get(0).getPrecio());
+        System.out.println(x.getProductos().get(1).getNombre() + " " + x.getProductos().get(1).getCantidad() + "" + x.getProductos().get(1).getTipo() + "" + x.getProductos().get(1).getPrecio());
 
         System.out.println(x.getProductos().size());
 

@@ -2,19 +2,20 @@ package com.company;
 
 import java.util.ArrayList;
 
-public class Tienda {
+public class Tienda implements TiendaInterface {
     public final static String CAMISETA = "CAMISETA";
     public final static String VASO = "VASO";
     public final static String JUGUETE = "JUGUETE";
     public final static String ACCESORIO = "ACCESORIO";
 
-    public ArrayList<Producto> productos;
+    private ArrayList<Producto> productos;
 
     public Tienda() {
         productos = new ArrayList<Producto>();
 
     }
 
+    @Override
     public void crearproducto(String nombreproducto, int cantidadproducto, double precio, String tipoproducto) {
         Producto x = new Producto(nombreproducto, cantidadproducto, precio, tipoproducto);
         productos.add(x);
@@ -22,6 +23,7 @@ public class Tienda {
 
     }
 
+    @Override
     public void vender(String nombreproducto) {
         for (int i = 0; i < productos.size(); i++) {
             if (productos.get(i).getNombre().equals(nombreproducto)) {
@@ -42,7 +44,7 @@ public class Tienda {
         this.productos = productos;
     }
 
-
+    @Override
     public String[] darnombres() {
         String[] x = new String[productos.size()];
         for (int i = 0; i < productos.size(); i++) {
@@ -51,6 +53,7 @@ public class Tienda {
         return x;
     }
 
+    @Override
     public Producto buscarpornombre(String nombre) {
         Producto x = null;
         boolean otro = false;
@@ -65,6 +68,7 @@ public class Tienda {
         return x;
     }
 
+    @Override
     public Producto actualizarproducto(String nombreproducto, int cantidadproducto, double precio, String tipoproducto) {
         Producto x = null;
 

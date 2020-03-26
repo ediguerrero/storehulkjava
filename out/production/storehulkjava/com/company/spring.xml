@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <alias name="Defaultcart" alias="cosa1"></alias>
+    <bean id="Defaultcart" class="Defaultcart">
+    </bean>
+    <alias name="Defaultpepe" alias="cosa1"></alias>
+    <bean id="Defaultpepe" class="Defaultpepe"></bean>
+
+    <alias name="Facade" alias="cosa2"></alias>
+    <bean id="Facade" class="Facade">
+        <property name="bcart" ref="cosa1"></property>
+
+    </bean>
+</beans>

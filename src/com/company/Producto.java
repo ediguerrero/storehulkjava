@@ -3,13 +3,13 @@ package com.company;
 public class Producto {
 
 
-    public int cantidad;
+    private int cantidad;
 
 
-    public double precio;
+    private double precio;
 
-    public String nombre;
-    public String tipo;
+    private String nombre;
+    private String tipo;
 
 
     public Producto(String Nombre, int cantidad, double precio, String tipo) {
