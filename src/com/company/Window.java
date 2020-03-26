@@ -6,7 +6,6 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Objects;
 
 public class Window extends JFrame {
     private JList lista;
@@ -21,14 +20,17 @@ public class Window extends JFrame {
 
         this.setLocation((pantalla.width - ventana.width) / 2, (pantalla.height - ventana.height) / 2);
         ;
+        this.setTitle("Hulk Store");
 
+        this.add(new JLabel(new ImageIcon("src/images/image.jpg")),BorderLayout.NORTH);
 
         this.setSize(600, 400);
         lista = new JList(tienda.darnombres());
         lista.setSize(200, 200);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JScrollPane scrollPne = new JScrollPane(lista);
 
-        this.getContentPane().add(lista, BorderLayout.WEST);
+        this.getContentPane().add(scrollPne, BorderLayout.CENTER);
 
         JLabel nombre1 = new JLabel("Nombre del producto");
         JTextField nombre = new JTextField("");
@@ -59,7 +61,7 @@ public class Window extends JFrame {
         panel1.add(tipo1);
         panel1.add(tipo);
 
-        this.add(panel1, BorderLayout.CENTER);
+        this.add(panel1, BorderLayout.EAST);
 
         JPanel panel2 = new JPanel();
         panel2.setLayout(new FlowLayout());
@@ -68,13 +70,24 @@ public class Window extends JFrame {
         vender.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                tienda.vender(nombre.getText());
+                if(nombre.getText().isEmpty()) {
+                    JOptionPane.showMessageDialog(vender, "selecciona un producto para vender primero ", "Cuidado", JOptionPane.WARNING_MESSAGE);
 
-                Producto x = tienda.buscarpornombre(lista.getSelectedValue().toString());
-                if (x != null) {
+                }else{
+                     tienda.vender(nombre.getText());
+                    Producto x = tienda.buscarpornombre(lista.getSelectedValue().toString());
+                    int cant =x.getCantidad();
+                    if (x != null) {
 
-                    cantidad.setText("" + x.getCantidad());
+                        cantidad.setText("" + x.getCantidad());
+                        if (cant == 0) {
+
+                            JOptionPane.showMessageDialog(vender, "ya no hay unidades para este producto, actualiza el stock ", "Cuidado", JOptionPane.WARNING_MESSAGE);
+
+                        }
+                    }
                 }
+
             }
 
         });
@@ -88,7 +101,7 @@ public class Window extends JFrame {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 if (nombre.getText().equals("")) {
-                    JOptionPane.showMessageDialog(actualizar, "agrega un producto primero ", "Cuidado", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(actualizar, "agrega o seleccione un producto primero ", "Cuidado", JOptionPane.WARNING_MESSAGE);
 
                 } else {
 
@@ -124,21 +137,22 @@ public class Window extends JFrame {
         this.add(panel2, BorderLayout.SOUTH);
 
 
-        JDialog insertarproducto = new JDialog();
+        JFrame insertarproducto = new JFrame();
         insertarproducto.setLocationRelativeTo(this);
         insertarproducto.setTitle("agrega un producto");
-        insertarproducto.setSize(400, 400);
+        insertarproducto.setSize(500, 800);
         insertarproducto.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         insertarproducto.setLayout(new BorderLayout());
         JPanel panel3 = new JPanel();
         panel3.setLayout(new GridLayout(8, 2));
+        insertarproducto.add(new JLabel(new ImageIcon("src/images/image2.jpg")),BorderLayout.WEST);
 
         JLabel nombre2 = new JLabel("Nombre del producto");
         JTextField nombre3 = new JTextField("");
         JLabel contidad12 = new JLabel("cantidad en stock");
-        JTextField cantidad3 = new JTextField("3");
+        JTextField cantidad3 = new JTextField("");
         JLabel precio12 = new JLabel("precio");
-        JTextField precio3 = new JTextField("3");
+        JTextField precio3 = new JTextField("");
         JLabel tipo12 = new JLabel("tipo");
         JComboBox tipo3 = new JComboBox();
 
@@ -160,7 +174,7 @@ public class Window extends JFrame {
         insertarproducto.add(panel3, BorderLayout.CENTER);
         JButton add = new JButton("agregar producto");
         insertarproducto.add(add, BorderLayout.SOUTH);
-
+        insertarproducto.pack();
         add.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -177,7 +191,9 @@ public class Window extends JFrame {
                             tienda.crearproducto(nombre3.getText(), can, pre, tipo3.getSelectedItem().toString());
                             insertarproducto.setVisible(false);
                             System.out.println(tienda.getProductos().size());
-
+                            nombre3.setText("");
+                            cantidad3.setText("");
+                            precio3.setText("");
                             lista.setListData(tienda.darnombres());
 
                         } else
@@ -185,8 +201,6 @@ public class Window extends JFrame {
                     }
                 } catch (NumberFormatException e) {
                     JOptionPane.showMessageDialog(insertarproducto, "la cantidad y el precio deben ser de tipo numerico", "Cuidado", JOptionPane.WARNING_MESSAGE);
-                } catch (NullPointerException e) {
-
                 }
             }
         });
@@ -215,6 +229,7 @@ public class Window extends JFrame {
 
             }
         });
+this.pack();
     }
 
 

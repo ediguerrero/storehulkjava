@@ -25,9 +25,10 @@ public class Tienda implements TiendaInterface {
 
     @Override
     public void vender(String nombreproducto) {
+        int cant=0;
         for (int i = 0; i < productos.size(); i++) {
-            if (productos.get(i).getNombre().equals(nombreproducto)) {
-                int cant = productos.get(i).getCantidad();
+            cant = productos.get(i).getCantidad();
+            if (productos.get(i).getNombre().equals(nombreproducto)&&cant>0) {
                 productos.get(i).setCantidad(cant - 1);
             }
             System.out.println("vendido");
@@ -56,12 +57,10 @@ public class Tienda implements TiendaInterface {
     @Override
     public Producto buscarpornombre(String nombre) {
         Producto x = null;
-        boolean otro = false;
 
         for (int i = 0; i < productos.size(); i++) {
             if (productos.get(i).getNombre().equals(nombre)) {
                 x = productos.get(i);
-                otro = true;
             }
             System.out.println("encontrado");
         }
